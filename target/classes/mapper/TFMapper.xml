@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybtis.org//DTO mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "www.silver.dao.IF_TFDAO">
+<insert id="insert" parameterType = "www.silver.vo.TFVO">
+insert into travelFood values(tf_cnt.nextval,#{username},#{place},#{restaurant},#{review},default)
+</insert>
+<select id="selectall" resultType = "www.silver.vo.TFVO">
+select * from travelFood
+</select>
+<delete id="delete" parameterType = "www.silver.vo.TFVO">
+delete from travelFood where no = #{no}
+</delete>
+<delete id="deletecomment" parameterType = "www.silver.vo.TFVO">
+delete from tComment where no = #{no}
+</delete>
+<update id="update" parameterType = "www.silver.vo.TFVO">
+update travelFood set username= #{username},place = #{place},restaurant = #{restaurant},review = #{review} where no = #{no}
+</update>
+<insert id="insertComment" parameterType = "www.silver.vo.CommentVO">
+insert into tComment values(#{no},#{c_user},#{tf_comment})
+</insert>
+<select id="selectComment" resultType = "www.silver.vo.CommentVO">
+select * from tComment where no = #{no}
+</select>
+<select id="search" resultType="www.silver.vo.TFVO">
+select * from travelFood where restaurant LIKE '%'||#{restaurant}||'%'
+</select>
+</mapper>
